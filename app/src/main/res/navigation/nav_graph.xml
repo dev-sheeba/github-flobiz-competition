@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.hfad.HomeFragment"
+        android:name="com.hfad.fobizlcompetition.ui.HomeFragment"
         android:label="HomeFragment" />
 </navigation>
