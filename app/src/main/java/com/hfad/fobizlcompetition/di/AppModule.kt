@@ -1,6 +1,9 @@
 package com.hfad.fobizlcompetition.di
 
+import android.app.Application
+import androidx.room.Room
 import com.hfad.fobizlcompetition.api.StackOverFlowApi
+import com.hfad.fobizlcompetition.db.QuestionDatabase
 import com.hfad.fobizlcompetition.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -27,4 +30,9 @@ object AppModule {
     fun provideStackOverFlowApi(retrofit: Retrofit): StackOverFlowApi =
         retrofit.create(StackOverFlowApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application) : QuestionDatabase =
+        Room.databaseBuilder(app, QuestionDatabase::class.java, "question_database")
+            .build()
 }

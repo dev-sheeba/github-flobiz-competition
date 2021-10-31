@@ -13,22 +13,21 @@ sealed class HomeItem{
         @SerializedName("question_id")
         @PrimaryKey
         @ColumnInfo(name = "question_id")
-        val questionId: Int,
+        val questionId: Long,
         @SerializedName("answer_count")
         @ColumnInfo(name = "answer_count")
         val answerCount: Int,
         @SerializedName("creation_date")
         @ColumnInfo(name = "creation_date")
         val creationDate: Int,
-        @SerializedName("view_count")
+        @Embedded
+        val owner: Owner,
         val title: String,
         @SerializedName("view_count")
         @ColumnInfo(name = "view_count")
         val viewCount: Int,
-        val link: String,
-        @Embedded
-        val owner: Owner,
-        val tags: List<String>
+        val tags: List<String>,
+        val link: String
     ): HomeItem()
 
     object Advertisement : HomeItem()

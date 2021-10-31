@@ -10,7 +10,10 @@ import com.hfad.fobizlcompetition.data.HomeItem
 import com.hfad.fobizlcompetition.databinding.BannerItemBinding
 import com.hfad.fobizlcompetition.databinding.QuestionItemBinding
 
-class QuestionAdapter: ListAdapter<HomeItem, HomeRecyclerViewHolder>(ListsComparator()) {
+class QuestionAdapter(private val listener: OnLinkClickListener ): ListAdapter<HomeItem, HomeRecyclerViewHolder>(ListsComparator()) {
+    interface OnLinkClickListener {
+        fun onLinkClicked(link:String)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeRecyclerViewHolder {
         return when(viewType) {
             R.layout.question_item -> HomeRecyclerViewHolder.QuestionViewHolder(
@@ -33,7 +36,7 @@ class QuestionAdapter: ListAdapter<HomeItem, HomeRecyclerViewHolder>(ListsCompar
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
         when (holder) {
-            is HomeRecyclerViewHolder.QuestionViewHolder -> holder.bind(getItem(position) as HomeItem.Question)
+            is HomeRecyclerViewHolder.QuestionViewHolder -> holder.bind(getItem(position) as HomeItem.Question, listener)
             is HomeRecyclerViewHolder.BannerViewHolder -> holder.bind(getItem(position) as HomeItem.Advertisement)
         }
     }
